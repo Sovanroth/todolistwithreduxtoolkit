@@ -28,10 +28,10 @@ export default function Home() {
     let item = localStorage.getItem("tasks") || null;
     console.log("item: ", item);
     let newList = item ? JSON.parse(item) : [];
-    console.log('newlist:',newList)
-    const list = newList.filter(f => f.id !== deleteId)
-    localStorage.setItem('tasks', JSON.stringify(list))
-  }
+    console.log("newlist:", newList);
+    const list = newList.filter((f) => f.id !== deleteId);
+    localStorage.setItem("tasks", JSON.stringify(list));
+  };
 
   React.useEffect(() => {
     handleGetItem();
@@ -77,4 +77,3 @@ export default function Home() {
     </div>
   );
 }
-

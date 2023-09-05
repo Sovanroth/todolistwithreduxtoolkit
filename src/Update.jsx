@@ -9,7 +9,7 @@ import { isAction } from "@reduxjs/toolkit";
 const Update = () => {
   const { id } = useParams();
   const tasks = useSelector((state) => state.tasks);
-  const [field,setField] = useState({});
+  const [field, setField] = useState({});
   // const existTask = tasks.filter((f) => f.id == id);
   // const { name } = existTask[""];
   const [eTask, setTask] = useState();
@@ -42,7 +42,6 @@ const Update = () => {
   //   // });
   //   // localStorage.setItem('task', JSON.stringify(list));
 
-
   // //   let item = list.map((item) =>{
   // //     if(item.id ===updateId){
   // //         return {...item, text: updateText}
@@ -58,49 +57,42 @@ const Update = () => {
   //   //   if(newItem.id === )
   //   // })
 
-
   //   navigate("/");
   // };
 
   const handleGetItem = () => {
     let item = localStorage.getItem("tasks") || null;
     let list = item ? JSON.parse(item) : [];
-    console.log('list =>', list)
+    console.log("list =>", list);
 
-    let updateItem = list?.find(item => item.id == id);
-    console.log('updateitem : ', updateItem)
+    let updateItem = list?.find((item) => item.id == id);
+    console.log("updateitem : ", updateItem);
     setField(updateItem);
-  }
+  };
 
-  const handleUpdate = (e,val) =>{
+  const handleUpdate = (e, val) => {
     e.preventDefault();
-    let updateItem = {...field, name: val};
+    let updateItem = { ...field, name: val };
     setField(updateItem);
 
     let item = localStorage.getItem("tasks") || null;
     let list = item ? JSON.parse(item) : [];
 
     let newItem = list.map((newItem) => {
-      if(newItem.id === field.id){
-        return field
+      if (newItem.id === field.id) {
+        return field;
       }
       return newItem;
-    })
+    });
 
-    localStorage.setItem('tasks',JSON.stringify(newItem))
+    localStorage.setItem("tasks", JSON.stringify(newItem));
 
-    console.log('update List:' ,newItem)
+    console.log("update List:", newItem);
+  };
 
-    
-
-  }
-
-
-  useEffect(()=>{
-    handleGetItem()
-  }, [])
-
-
+  useEffect(() => {
+    handleGetItem();
+  }, []);
 
   return (
     <form onSubmit={handleUpdate}>
@@ -110,9 +102,15 @@ const Update = () => {
         name="task"
         placeholder="update task"
         value={field?.name}
-        onChange={(e) => handleUpdate(e,e.target.value)}
+        onChange={(e) => handleUpdate(e, e.target.value)}
       />
-      <Button onClick={()=> navigate("/")} type="submit" sx={{ mt: 2 }} variant="contained" disableElevation>
+      <Button
+        onClick={() => navigate("/")}
+        type="submit"
+        sx={{ mt: 2 }}
+        variant="contained"
+        disableElevation
+      >
         Update Task
       </Button>
     </form>

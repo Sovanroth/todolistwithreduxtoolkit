@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addTask } from "./TaskReducer";
@@ -15,26 +14,25 @@ const TaskForm = () => {
   //   localStorage.setItem('task', JSON.stringify(task))
   // }, [task])
 
-  const handleAddItemToStorage= (newItem) => {
-    let item = localStorage.getItem('tasks')||null;
-    console.log('item: ', item)
-    let newList = item ?  [...JSON.parse(item),newItem]:[newItem];
-    console.log('new list:',newList)
-    localStorage.setItem('tasks', JSON.stringify(newList))
-  }
+  const handleAddItemToStorage = (newItem) => {
+    let item = localStorage.getItem("tasks") || null;
+    console.log("item: ", item);
+    let newList = item ? [...JSON.parse(item), newItem] : [newItem];
+    console.log("new list:", newList);
+    localStorage.setItem("tasks", JSON.stringify(newList));
+  };
 
-  const getLengthId = () =>{
-    let item = localStorage.getItem('tasks')||null;
-    let list = item ?  JSON.parse(item):[];
-    return parseInt(list.length)+1
-  }
-
+  const getLengthId = () => {
+    let item = localStorage.getItem("tasks") || null;
+    let list = item ? JSON.parse(item) : [];
+    return parseInt(list.length) + 1;
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    let item= { id: getLengthId(), name: task };
+    let item = { id: getLengthId(), name: task };
     dispatch(addTask(item));
-    handleAddItemToStorage(item)
+    handleAddItemToStorage(item);
   };
 
   return (
